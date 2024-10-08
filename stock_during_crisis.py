@@ -1,80 +1,3 @@
-# import streamlit as st
-# import yfinance as yf
-# import pandas as pd
-# import matplotlib.pyplot as plt
-# from datetime import datetime
-#
-# # List of available tickers for users to choose
-# available_tickers = [
-#     'AAPL', 'MSFT', 'AMZN', 'BRK-B', 'BAC', 'C', 'GS', 'XOM',
-#     'USO', 'PFE', 'UNP', 'UPS', 'O', 'VNQ', 'GLD',
-#     'SPY', 'QQQ', 'IEI', 'IEF', 'TLT'
-# ]
-#
-# # Define crisis dates
-# crisis_dates = {
-#     "COVID-19 Market Crash": ("2020-02-01", "2020-04-30"),
-#     "Global Financial Crisis": ("2008-10-01", "2009-03-31"),
-#     "Dot-com Bubble Burst": ("2000-03-01", "2002-10-31"),
-#     "Asian Financial Crisis": ("1997-07-01", "1998-01-31"),
-#     "Black Monday": ("1987-06-01", "1987-12-31"),
-#     "Savings and Loan Crisis": ("1986-01-01", "1995-12-31"),
-#     "1973-74 Stock Market Crash": ("1973-10-01", "1974-04-30")
-# }
-#
-# # Function to fetch stock data from yfinance
-# def fetch_data(tickers, start_date, end_date):
-#     data = yf.download(tickers, start=start_date, end=end_date)["Adj Close"]
-#     return data
-#
-# # Function to normalize stock data
-# def normalize_data(data):
-#     return data / data.iloc[0] * 100  # Normalize to 100
-#
-# # Function to plot the crisis data
-# def plot_crisis_data(crisis_name, start_date, end_date, tickers):
-#     data = fetch_data(tickers, start_date, end_date)
-#     normalized_data = normalize_data(data)
-#
-#     plt.figure(figsize=(14, 7))
-#     for ticker in tickers:
-#         if ticker in normalized_data.columns:
-#             plt.plot(normalized_data.index, normalized_data[ticker], label=ticker)
-#
-#     plt.title(f'Stock Prices During {crisis_name}')
-#     plt.xlabel('Date')
-#     plt.ylabel('Normalized Price (%)')
-#     plt.axvline(pd.to_datetime(start_date), color='red', linestyle='--', label='Crisis Start')
-#     plt.axvline(pd.to_datetime(end_date), color='green', linestyle='--', label='Crisis End')
-#     plt.legend()
-#     plt.grid()
-#     st.pyplot(plt)
-#
-# # Streamlit sidebar inputs
-# st.sidebar.header('Stock and Crisis Selection')
-#
-# # User can input up to 5 stock tickers
-# selected_tickers = st.sidebar.text_input('Enter up to 5 stock tickers separated by commas (e.g., AAPL, MSFT)', value='AAPL, MSFT')
-# selected_tickers = [ticker.strip().upper() for ticker in selected_tickers.split(',') if ticker.strip().upper() in available_tickers]
-#
-# if len(selected_tickers) == 0 or len(selected_tickers) > 5:
-#     st.sidebar.error('Please select between 1 and 5 valid tickers from the available list.')
-#
-# # Crisis selection dropdown
-# selected_crisis = st.sidebar.selectbox('Select a Crisis', list(crisis_dates.keys()))
-#
-# # Plot the graph based on user selection
-# if selected_tickers and selected_crisis:
-#     st.header(f'Stock Prices During {selected_crisis}')
-#     start_date, end_date = crisis_dates[selected_crisis]
-#     plot_crisis_data(selected_crisis, start_date, end_date, selected_tickers)
-# else:
-#     st.write("Please input valid tickers and select a crisis to display the graph.")
-#
-# # Optional: display the list of available tickers to help users
-# with st.sidebar.expander("Available Tickers"):
-#     st.write(", ".join(available_tickers))
-
 import streamlit as st
 import yfinance as yf
 import matplotlib.pyplot as plt
@@ -94,6 +17,8 @@ crisis_dates = {
     "1973-74 Stock Market Crash": ("1973-10-01", "1974-04-30")
 }
 
+st.write(
+    '###### REMARK: Click the arrow icon in the top left corner to open the control sidebar, where you can select stock tickers and crisis events.')
 
 # Function to fetch stock data from yfinance
 def fetch_data(tickers, start_date, end_date):
